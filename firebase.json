@@ -1,0 +1,22 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "auvnet-task",
+          "appId": "1:217328707822:android:d8026609c62b65253b2bff",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "auvnet-task",
+          "configurations": {
+            "android": "1:217328707822:android:d8026609c62b65253b2bff",
+            "ios": "1:217328707822:ios:dd33943d63b147473b2bff"
+          }
+        }
+      }
+    }
+  }
+}
