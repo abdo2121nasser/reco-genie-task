@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyB_UIx47gIyTLp1LISAAdJ2lO6lFn2lHcU',
-    appId: '1:217328707822:android:d8026609c62b65253b2bff',
+    appId: '1:217328707822:android:2c809be1fe9b2d7f3b2bff',
     messagingSenderId: '217328707822',
     projectId: 'auvnet-task',
     storageBucket: 'auvnet-task.firebasestorage.app',
@@ -59,11 +59,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDA5CNDFYSDFDq_bWvA3TPJ_Tr5VvlRRag',
-    appId: '1:217328707822:ios:dd33943d63b147473b2bff',
+    appId: '1:217328707822:ios:c4bbdf1fafbaa42f3b2bff',
     messagingSenderId: '217328707822',
     projectId: 'auvnet-task',
     storageBucket: 'auvnet-task.firebasestorage.app',
-    iosBundleId: 'com.example.recoGenieTask',
+    iosBundleId: 'com.example.auventFlutterInternshipAssessment',
   );
-
 }

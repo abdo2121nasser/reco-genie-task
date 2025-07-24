@@ -47,8 +47,7 @@ class SignUpMultiBlocListenerWidget extends StatelessWidget {
               previous.storeUserState != current.storeUserState,
           listener: (context, state) {
             if (state.storeUserState == RequestStateEnum.success) {
-              // AppRoute.router.pushReplacement(AppRoute.mainShellScreen);
-              //todo uncommint
+              AppRoute.router.pushReplacement(AppRoute.mainShellScreen);
             } else if (state.storeUserState == RequestStateEnum.error) {
               showToastMessage(message: state.errorMessage);
             }
