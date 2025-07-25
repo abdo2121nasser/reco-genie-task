@@ -19,7 +19,7 @@ class MyCartBodyWidget extends StatelessWidget {
         }
       },
       child: Column(
-fi        children: [
+     children: [
           SizedBox(
             height: k20V,
             width: double.maxFinite,
