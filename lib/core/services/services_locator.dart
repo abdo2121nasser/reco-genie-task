@@ -29,6 +29,17 @@ import 'package:reco_genie_task/features/home_feature/domain_layer/use_cases/get
 import 'package:reco_genie_task/features/home_feature/presentation_layer/controllers/popular_bloc/popular_bloc.dart';
 import 'package:reco_genie_task/features/home_feature/presentation_layer/controllers/slider_bloc/slider_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:reco_genie_task/features/my_cart_feature/data_layer/data_source/base_data_source/base_cart_remote_data_source.dart';
+import 'package:reco_genie_task/features/my_cart_feature/data_layer/data_source/cart_remote_data_source.dart';
+import 'package:reco_genie_task/features/my_cart_feature/data_layer/reposities/cart_repository.dart';
+import 'package:reco_genie_task/features/my_cart_feature/domain_layer/use_cases/add_product_to_cart_use_case.dart';
+import 'package:reco_genie_task/features/my_cart_feature/presentation_layer/controllers/cart_cubit/cart_cubit.dart';
+import 'package:reco_genie_task/features/shopping_feature/data_layer/data_source/remote/base_data_source/base_products_remote_data_source.dart';
+import 'package:reco_genie_task/features/shopping_feature/data_layer/data_source/remote/products_remote_data_source.dart';
+import 'package:reco_genie_task/features/shopping_feature/data_layer/reposities/products_repository.dart';
+import 'package:reco_genie_task/features/shopping_feature/domain_layer/reposities/base_product_repository.dart';
+import 'package:reco_genie_task/features/shopping_feature/domain_layer/use_cases/get_all_products_use_case.dart';
+import 'package:reco_genie_task/features/shopping_feature/presentation_layer/controllers/productCubit/product_cubit.dart';
 
 import '../../features/authentication_feature/domain_layer/use_cases/get_local_user_use_case.dart';
 import '../../features/authentication_feature/domain_layer/use_cases/sign_up_use_case.dart';
@@ -38,11 +49,16 @@ import '../../features/home_feature/data_layer/reposities/popular_repository.dar
 import '../../features/home_feature/domain_layer/reposities/base_popular_repository.dart';
 import '../../features/home_feature/domain_layer/use_cases/get_popular_use_case.dart';
 import '../../features/home_feature/presentation_layer/controllers/service_bloc/service_bloc.dart';
+import '../../features/my_cart_feature/domain_layer/reposities/base_cart_repository.dart';
 
 final sl = GetIt.instance;
 
 class ServicesLocator {
   static void init() {
+    //cubits
+    sl.registerFactory(() => ProductCubit(getAllProductsUseCase: sl()));
+    sl.registerFactory(() => CartCubit(addProductToCartUseCase: sl()));
+
     //blocs
     sl.registerFactory(() => SignInBloc(signInUseCase: sl()));
     sl.registerFactory(() => SignUpBloc(signUpUseCase: sl()));
@@ -75,6 +91,12 @@ class ServicesLocator {
         () => GetPopularUseCase(basePopularRepository: sl()));
     sl.registerLazySingleton(
         () => GetSliderImagesUseCase(baseSliderRepository: sl()));
+    sl.registerLazySingleton(
+        () => GetAllProductsUseCase(baseProductRepository: sl()));
+    sl.registerLazySingleton(
+        () => AddProductToCartUseCase(baseCartRepository: sl()));
+
+
     //repositories
     sl.registerLazySingleton<BaseAuthenticationRepository>(() =>
         AuthenticationRepository(baseAuthenticationRemoteDataSource: sl()));
@@ -87,6 +109,12 @@ class ServicesLocator {
         () => PopularRepository(basePopularRemoteDataSource: sl()));
     sl.registerLazySingleton<BaseSliderRepository>(
         () => SliderRepository(baseSliderImagesRemoteDataSource: sl()));
+    sl.registerLazySingleton<BaseProductRepository>(
+        () => ProductsRepository(baseProductsRemoteDataSource: sl()));
+    sl.registerLazySingleton<BaseCartRepository>(
+        () => CartRepository(baseCartRemoteDataSource: sl()));
+
+
     //data source
     sl.registerLazySingleton<BaseAuthenticationRemoteDataSource>(
         () => AuthenticationByFirebaseDataSource());
@@ -101,5 +129,9 @@ class ServicesLocator {
         () => PopularRemoteDataSource());
     sl.registerLazySingleton<BaseSliderImagesRemoteDataSource>(
         () => SliderImagesRemoteDataSource());
+    sl.registerLazySingleton<BaseProductsRemoteDataSource>(
+        () => ProductsRemoteDataSource());
+    sl.registerLazySingleton<BaseCartRemoteDataSource>(
+        () => CartRemoteDataSource());
   }
 }

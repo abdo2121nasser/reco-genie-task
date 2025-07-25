@@ -33,9 +33,9 @@ class UiStrings{
   static const String kUnknownErrorMessage='An unexpected error occurred. Please try again later.';
 
   static const String kHomeWord='Home';
-  static const String kCategoriesWord='categories';
+  static const String kShoppingWord='Shopping';
   static const String kDeliverWord='Deliver';
-  static const String kCartWord='cart';
+  static const String kMyCartWord='My Cart';
   static const String kProfileWord='Profile';
 
 
@@ -44,5 +44,8 @@ class UiStrings{
   static const String kGotCodeMessage='Add your code and save on your order';
   static const String kShortCutWord='Shortcuts';
   static const String kPopularSectionWord='Popular restaurants nearby';
+
+  static const String kAddToCartLabel='Add To Cart';
+
 
 }

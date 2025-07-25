@@ -16,5 +16,8 @@ class LogicStrings{
 
   static const String kIsRunAppForFirstTime='run app for first time';
 
+  static const String kProductsCollection='products collection';
+  static const String kCartCollection='cart collection';
+
 
 }

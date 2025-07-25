@@ -16,7 +16,6 @@ class GeneralButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         onPressed: function,
-
         child: Text(
           label,
           style: textStyle,

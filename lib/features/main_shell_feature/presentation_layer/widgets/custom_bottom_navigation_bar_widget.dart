@@ -1,11 +1,10 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reco_genie_task/core/utils/colors/colors.dart';
 import 'package:reco_genie_task/core/utils/constants/images.dart';
 import 'package:reco_genie_task/core/utils/values/app_size.dart';
 import 'package:reco_genie_task/features/main_shell_feature/presentation_layer/controllers/bottom_navigation_bar_bloc/bottom_navigation_bar_bloc.dart';
-import 'package:reco_genie_task/features/main_shell_feature/presentation_layer/controllers/bottom_navigation_bar_bloc/bottom_navigation_bar_bloc.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/constants/ui_strings.dart';
 
@@ -38,17 +37,17 @@ class CustomBottomNavigationBarWidget extends StatelessWidget {
               label: UiStrings.kHomeWord,
             ),
             const BottomNavigationBarItem(
-              icon: Icon(Icons.category),
-              label: UiStrings.kCategoriesWord,
+              icon: Icon(Icons.shopping_basket),
+              label: UiStrings.kShoppingWord,
+            ),const BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.shopping_cart),
+              label: UiStrings.kMyCartWord,
             ),
             const BottomNavigationBarItem(
               icon: Icon(Icons.local_shipping),
               label: UiStrings.kDeliverWord,
             ),
-            const BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.shopping_cart),
-              label: UiStrings.kCartWord,
-            ),
+
             const BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.person),
               label: UiStrings.kProfileWord,
