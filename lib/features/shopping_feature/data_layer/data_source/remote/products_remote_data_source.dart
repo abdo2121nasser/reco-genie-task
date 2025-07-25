@@ -16,7 +16,7 @@ class ProductsRemoteDataSource extends BaseProductsRemoteDataSource {
       return result.docs
           .map(
             (e) {
-              return ProductModel.fromJson(e.data());
+              return ProductModel.fromJson(e.data(),e.id);
             },
           )
           .toList();

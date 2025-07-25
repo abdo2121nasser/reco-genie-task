@@ -46,6 +46,7 @@ class UiStrings{
   static const String kPopularSectionWord='Popular restaurants nearby';
 
   static const String kAddToCartLabel='Add To Cart';
+  static const String kRemoveWord='Remove';
 
 
 }

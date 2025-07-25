@@ -5,10 +5,13 @@ import 'package:reco_genie_task/features/shopping_feature/presentation_layer/wid
 import '../../../../core/utils/values/app_size.dart';
 
 class ProductItemsListViewWidget extends StatelessWidget {
-final  List<ProductEntity> items;
+  final bool isAddToCartButton;
+
+  final  List<ProductEntity> items;
   const ProductItemsListViewWidget({
     super.key,
-    required this.items
+    required this.items,
+    required this.isAddToCartButton
   });
 
   @override
@@ -17,7 +20,7 @@ final  List<ProductEntity> items;
       child: ListView.separated(
         padding: EdgeInsets.symmetric(horizontal: k20H,vertical: k20V),
         separatorBuilder: (context, index) => SizedBox(height: k14V,),
-        itemBuilder: (context, index) => ProductItemWidget(product: items[index],),
+        itemBuilder: (context, index) => ProductItemWidget(product: items[index],isAddToCartButton: isAddToCartButton,),
         itemCount: items.length,
       ),
     );

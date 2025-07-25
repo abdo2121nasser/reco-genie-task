@@ -1,7 +1,8 @@
+import 'package:get_it/get_it.dart';
 import 'package:reco_genie_task/features/authentication_feature/data_layer/data_source/local/base_data_source/base_user_local_data_source.dart';
 import 'package:reco_genie_task/features/authentication_feature/data_layer/data_source/local/user_hive_local_data_source.dart';
-import 'package:reco_genie_task/features/authentication_feature/data_layer/data_source/remote/base_data_source/base_authentication_remote_data_source.dart';
 import 'package:reco_genie_task/features/authentication_feature/data_layer/data_source/remote/authentication_by_firebase_data_source.dart';
+import 'package:reco_genie_task/features/authentication_feature/data_layer/data_source/remote/base_data_source/base_authentication_remote_data_source.dart';
 import 'package:reco_genie_task/features/authentication_feature/data_layer/data_source/remote/base_data_source/base_user_remote_data_source.dart';
 import 'package:reco_genie_task/features/authentication_feature/data_layer/data_source/remote/user_firebase_remote_data_source.dart';
 import 'package:reco_genie_task/features/authentication_feature/data_layer/repositories/authentication_repository.dart';
@@ -28,11 +29,12 @@ import 'package:reco_genie_task/features/home_feature/domain_layer/use_cases/get
 import 'package:reco_genie_task/features/home_feature/domain_layer/use_cases/get_slider_images_use_case.dart';
 import 'package:reco_genie_task/features/home_feature/presentation_layer/controllers/popular_bloc/popular_bloc.dart';
 import 'package:reco_genie_task/features/home_feature/presentation_layer/controllers/slider_bloc/slider_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:reco_genie_task/features/my_cart_feature/data_layer/data_source/base_data_source/base_cart_remote_data_source.dart';
 import 'package:reco_genie_task/features/my_cart_feature/data_layer/data_source/cart_remote_data_source.dart';
 import 'package:reco_genie_task/features/my_cart_feature/data_layer/reposities/cart_repository.dart';
 import 'package:reco_genie_task/features/my_cart_feature/domain_layer/use_cases/add_product_to_cart_use_case.dart';
+import 'package:reco_genie_task/features/my_cart_feature/domain_layer/use_cases/get_my_cart_products_use_case.dart';
+import 'package:reco_genie_task/features/my_cart_feature/domain_layer/use_cases/remove_product_from_cart_use_case.dart';
 import 'package:reco_genie_task/features/my_cart_feature/presentation_layer/controllers/cart_cubit/cart_cubit.dart';
 import 'package:reco_genie_task/features/shopping_feature/data_layer/data_source/remote/base_data_source/base_products_remote_data_source.dart';
 import 'package:reco_genie_task/features/shopping_feature/data_layer/data_source/remote/products_remote_data_source.dart';
@@ -57,7 +59,10 @@ class ServicesLocator {
   static void init() {
     //cubits
     sl.registerFactory(() => ProductCubit(getAllProductsUseCase: sl()));
-    sl.registerFactory(() => CartCubit(addProductToCartUseCase: sl()));
+    sl.registerFactory(() => CartCubit(
+        addProductToCartUseCase: sl(),
+        getMyCartProductsUseCase: sl(),
+        removeProductFromCartUseCase: sl()));
 
     //blocs
     sl.registerFactory(() => SignInBloc(signInUseCase: sl()));
@@ -73,17 +78,17 @@ class ServicesLocator {
 
     //useCase
     sl.registerLazySingleton(
-        () => SignInUseCase(baseAuthenticationRepository: sl()));
+            () => SignInUseCase(baseAuthenticationRepository: sl()));
     sl.registerLazySingleton(
-        () => SignUpUseCase(baseAuthenticationRepository: sl()));
+            () => SignUpUseCase(baseAuthenticationRepository: sl()));
     sl.registerLazySingleton(() => CreateUserUseCase(baseUserRepository: sl()));
     sl.registerLazySingleton(() => StoreUserUseCase(baseUserRepository: sl()));
     sl.registerLazySingleton(
-        () => GetRemoteUserUseCase(baseUserRepository: sl()));
+            () => GetRemoteUserUseCase(baseUserRepository: sl()));
     sl.registerLazySingleton(
-        () => GetLocalUserUseCase(baseUserRepository: sl()));
+            () => GetLocalUserUseCase(baseUserRepository: sl()));
     sl.registerLazySingleton(
-        () => IsSignedInUseCase(baseAuthenticationRepository: sl()));
+            () => IsSignedInUseCase(baseAuthenticationRepository: sl()));
 
     sl.registerLazySingleton(
         () => GetServicesUseCase(baseServiceRepository: sl()));
@@ -95,7 +100,10 @@ class ServicesLocator {
         () => GetAllProductsUseCase(baseProductRepository: sl()));
     sl.registerLazySingleton(
         () => AddProductToCartUseCase(baseCartRepository: sl()));
-
+    sl.registerLazySingleton(
+        () => GetMyCartProductsUseCase(baseCartRepository: sl()));
+    sl.registerLazySingleton(
+        () => RemoveProductFromCartUseCase(baseCartRepository: sl()));
 
     //repositories
     sl.registerLazySingleton<BaseAuthenticationRepository>(() =>
@@ -106,32 +114,32 @@ class ServicesLocator {
     sl.registerLazySingleton<BaseServiceRepository>(
         () => ServiceRepository(baseServiceRemoteDataSource: sl()));
     sl.registerLazySingleton<BasePopularRepository>(
-        () => PopularRepository(basePopularRemoteDataSource: sl()));
+            () => PopularRepository(basePopularRemoteDataSource: sl()));
     sl.registerLazySingleton<BaseSliderRepository>(
-        () => SliderRepository(baseSliderImagesRemoteDataSource: sl()));
+            () => SliderRepository(baseSliderImagesRemoteDataSource: sl()));
     sl.registerLazySingleton<BaseProductRepository>(
-        () => ProductsRepository(baseProductsRemoteDataSource: sl()));
+            () => ProductsRepository(baseProductsRemoteDataSource: sl()));
     sl.registerLazySingleton<BaseCartRepository>(
-        () => CartRepository(baseCartRemoteDataSource: sl()));
+            () => CartRepository(baseCartRemoteDataSource: sl()));
 
 
     //data source
     sl.registerLazySingleton<BaseAuthenticationRemoteDataSource>(
-        () => AuthenticationByFirebaseDataSource());
+            () => AuthenticationByFirebaseDataSource());
     sl.registerLazySingleton<BaseUserRemoteDataSource>(
-        () => UserFirebaseRemoteDataSource());
+            () => UserFirebaseRemoteDataSource());
     sl.registerLazySingleton<BaseUserLocalDataSource>(
-        () => UserHiveLocalDataSource());
+            () => UserHiveLocalDataSource());
 
     sl.registerLazySingleton<BaseServiceRemoteDataSource>(
-        () => ServiceRemoteDataSource());
+            () => ServiceRemoteDataSource());
     sl.registerLazySingleton<BasePopularRemoteDataSource>(
-        () => PopularRemoteDataSource());
+            () => PopularRemoteDataSource());
     sl.registerLazySingleton<BaseSliderImagesRemoteDataSource>(
-        () => SliderImagesRemoteDataSource());
+            () => SliderImagesRemoteDataSource());
     sl.registerLazySingleton<BaseProductsRemoteDataSource>(
-        () => ProductsRemoteDataSource());
+            () => ProductsRemoteDataSource());
     sl.registerLazySingleton<BaseCartRemoteDataSource>(
-        () => CartRemoteDataSource());
+            () => CartRemoteDataSource());
   }
 }

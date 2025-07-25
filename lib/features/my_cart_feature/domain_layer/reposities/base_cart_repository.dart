@@ -4,4 +4,6 @@ import 'package:reco_genie_task/features/shopping_feature/domain_layer/entities/
 
 abstract class BaseCartRepository{
   Future<Either<Failure,void>> addProduct({required ProductEntity item});
+  Future<Either<Failure, void>> removeProduct(ProductEntity item);
+  Future<Either<Failure,List<ProductEntity>>> getMyCartProducts();
 }

@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reco_genie_task/features/home_feature/presentation_layer/bodies/home_body.dart';
+import 'package:reco_genie_task/features/my_cart_feature/presentation_layer/bodies/my_cart_body.dart';
 import 'package:reco_genie_task/features/shopping_feature/presentation_layer/bodies/shopping_body.dart';
 
 part 'bottom_navigation_bar_event.dart';
@@ -21,7 +22,7 @@ class BottomNavigationBarBloc
   final List<Widget> _bodies = [
     const HomeBody(),
     const ShoppingBody(),
-    const Placeholder(),
+    const MyCartBody(),
     const Placeholder(),
     const Placeholder(),
   ];

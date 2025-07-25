@@ -8,15 +8,18 @@ import '../../../../../core/services/fire_base_failure_service.dart';
 part 'product_state.dart';
 
 class ProductCubit extends Cubit<ProductState> {
-  ProductCubit({required this.getAllProductsUseCase}) : super(ProductInitial());
-  final GetAllProductsUseCase getAllProductsUseCase;
+  ProductCubit({required GetAllProductsUseCase getAllProductsUseCase})
+      : _getAllProductsUseCase = getAllProductsUseCase,
+        super(ProductInitial());
+
+  final GetAllProductsUseCase _getAllProductsUseCase;
 
   static ProductCubit get(context) => BlocProvider.of(context);
 
   getAllProduct() async {
     emit(GetAllProductsLoadingState());
 
-    final result = await getAllProductsUseCase(null);
+    final result = await _getAllProductsUseCase(null);
 
     result.fold(
       (failure) {

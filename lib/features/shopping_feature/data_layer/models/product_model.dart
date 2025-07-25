@@ -3,13 +3,15 @@ import 'package:reco_genie_task/features/shopping_feature/domain_layer/entities/
 
 class ProductModel extends ProductEntity {
   ProductModel({
+    required super.id,
     required super.imageUrl,
     required super.label,
     required super.price,
   });
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) {
+  factory ProductModel.fromJson(Map<String, dynamic> json,String id) {
     return ProductModel(
+       id: id,
       imageUrl: json['imageLink'],
       price: json['price'],
       label: json['label'],
@@ -25,6 +27,7 @@ class ProductModel extends ProductEntity {
   }
   factory ProductModel.fromEntity(ProductEntity entity) {
     return ProductModel(
+      id: entity.id,
       imageUrl: entity.imageUrl,
       price: entity.price,
       label: entity.label,
